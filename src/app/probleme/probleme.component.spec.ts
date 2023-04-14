@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProblemeComponent } from './probleme.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('ProblemeComponent', () => {
   let component: ProblemeComponent;
@@ -8,6 +9,7 @@ describe('ProblemeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports:[ReactiveFormsModule],
       declarations: [ ProblemeComponent ]
     })
     .compileComponents();
@@ -38,5 +40,25 @@ describe('ProblemeComponent', () => {
     let errors = zone?.errors || {};
     expect(errors['maxlength']).toBeFalsy();  
   });
+  it('Zone PRÉNOM invalide avec aucune valeur', () => {
+    let zone = component.problemeForm?.controls['prenom'];
+    zone?.setValue('');
+    let errors = zone?.errors || {};
+    expect(errors['required']).toBeTruthy();  
+  });
+  it('Zone PRÉNOM valide avec 10 espaces', () => {
+    let zone = component.problemeForm?.controls['prenom'];
+    zone?.setValue(' '.repeat(10));
+    let errors = zone?.errors || {};
+    expect(errors['required']).toBeFalsy();  
+  });
+  it('Zone PRÉNOM valide avec 2 espaces et 1 caractère', () => {
+    let zone = component.problemeForm?.controls['prenom'];
+    zone?.setValue('  a');
+    let errors = zone?.errors || {};
+    expect(errors['minlength']).toBeFalsy();  
+  });
+  
+  
   
 });

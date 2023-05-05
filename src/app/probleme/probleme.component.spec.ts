@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProblemeComponent } from './probleme.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TypeproblemeService } from './probleme.service';
+import { HttpClientJsonpModule } from '@angular/common/http';
 
 describe('ProblemeComponent', () => {
   let component: ProblemeComponent;
@@ -9,8 +11,9 @@ describe('ProblemeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[ReactiveFormsModule],
-      declarations: [ ProblemeComponent ]
+      imports:[ReactiveFormsModule, HttpClientJsonpModule],
+      declarations: [ ProblemeComponent ],
+      providers:[TypeproblemeService]
     })
     .compileComponents();
 
@@ -65,6 +68,11 @@ describe('ProblemeComponent', () => {
     expect(errors['longueurMinimum']).toBeFalsy();  
   });
   
-  
+//#15 | Zone TELEPHONE est désactivée quand ne pas me notifier
+//#16 | Zone TELEPHONE est vide quand ne pas me notifier
+//#17 | Zone ADRESSE COURRIEL est désactivée quand ne pas me notifier
+//#18 | Zone CONFIRMER COURRIEL est désactivée quand ne pas me notifier
+
+
   
 });
